@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model games {
+  id                              Int   @id
+  year                            Int   @db.SmallInt
+  week                            Int   @db.SmallInt
+  postseason                      Int   @default(0) @db.SmallInt
+  id_home_team                    Int
+  id_away_team                    Int
+  points_home                     Int?  @db.SmallInt
+  points_away                     Int?  @db.SmallInt
+  completed                       Int   @db.SmallInt
+  conference_game                 Int   @default(0) @db.SmallInt
+  teams_games_id_away_teamToteams teams @relation("games_id_away_teamToteams", fields: [id_away_team], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fx_away_team")
+  teams_games_id_home_teamToteams teams @relation("games_id_home_teamToteams", fields: [id_home_team], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fx_home_team")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model logos {
+  id         Int     @id
+  team_id    Int?
+  year_first Int
+  year_last  Int?
+  image      String?
+}
+
+model rankings {
+  id                Int     @id
+  team_id           Int
+  postseason        Int     @default(0) @db.SmallInt
+  poll              String?
+  first_place_votes Int?    @db.SmallInt
+  points            Int?    @db.SmallInt
+  conference        String?
+  ranking           Int?    @db.SmallInt
+  week              Int?    @db.SmallInt
+  year              Int     @db.SmallInt
+  teams             teams   @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_team_idx")
+}
+
+model records {
+  id         Int     @id
+  year       Int     @db.SmallInt
+  team_id    Int
+  division   String?
+  conference String?
+  win_total  Int?    @db.SmallInt
+  loss_total Int?    @db.SmallInt
+  tie_total  Int?    @db.SmallInt
+  win_conf   Int?    @db.SmallInt
+  loss_conf  Int?    @db.SmallInt
+  tie_conf   Int?    @db.SmallInt
+  teams      teams   @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_team_idx")
+}
+
+model teams {
+  id                              Int        @id
+  name_full                       String?
+  name_school                     String
+  mascot                          String?
+  games_games_id_away_teamToteams games[]    @relation("games_id_away_teamToteams")
+  games_games_id_home_teamToteams games[]    @relation("games_id_home_teamToteams")
+  rankings                        rankings[]
+  records                         records[]
+}
