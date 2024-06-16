@@ -1,6 +1,5 @@
 'use client'
 /* eslint-disable react/prop-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, IconButton, MenuItem, Select, Stack, Switch, Typography } from '@mui/material';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';

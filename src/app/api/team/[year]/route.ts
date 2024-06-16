@@ -1,8 +1,7 @@
 import { TeamResponse } from '@/type/team';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
-
-const prisma = new PrismaClient();
+import prisma from '@/lib/prisma';
 
 type Params = {
   year: number

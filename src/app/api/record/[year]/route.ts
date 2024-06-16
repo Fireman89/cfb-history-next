@@ -1,8 +1,7 @@
 import { RecordResponse } from '@/type/record';
 import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
-
-const prisma = new PrismaClient();
+import prisma from '@/lib/prisma';
 
 type Params = {
   year: string
@@ -12,7 +11,7 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
   const { year } = params;
   try {
         // TODO fix this error
-        const records: RecordResponse[] = await prisma.records.findMany({
+        const records: any = await prisma.records.findMany({
           where: {
             year: parseInt(year)
           },

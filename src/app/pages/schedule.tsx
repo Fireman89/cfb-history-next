@@ -10,7 +10,7 @@ import { NO_TEAM } from '../../store/currentScheduleSlice';
 import Rankings from '../../component/Rankings';
 import useWindowSize from '../../hook/useWindowSize';
 import { useEffect } from 'react';
-import { getAllTeamsInYear } from '../../api/teamService';
+import TeamService from '../../api/teamService';
 import { setTeamList } from '../../store/teamListSlice';
 import { Team } from '../../type/team';
 import { FIRST_YEAR, desktopHeight, desktopWidth } from '../../const/const';
@@ -49,12 +49,12 @@ const SchedulePage: React.FC = () => {
 
     const dispatch = useAppDispatch();
     // Call once when initialized
-    getAllTeamsInYear(currentYear).then(response => {
+    TeamService.getAllTeamsInYear(currentYear).then((response: any) => {
         dispatch(setTeamList(response as Team[]));
     });
     useEffect(() => {
         // Update years once current year is changed
-        getAllTeamsInYear(currentYear).then(response => {
+        TeamService.getAllTeamsInYear(currentYear).then((response: any) => {
             dispatch(setTeamList(response as Team[]));
         });
     },[currentYear, dispatch]);
