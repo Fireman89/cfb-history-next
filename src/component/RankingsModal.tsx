@@ -16,6 +16,7 @@ const height = 70;
 const width = 130;
 const logoHeight = 50;
 
+// Pop-up rankings screen if on mobile site
 const RankingsModal: React.FC<MyProps> = ({ year }) => {
     const [rankings, setRankings] = useState<Ranking[]>([]);
 

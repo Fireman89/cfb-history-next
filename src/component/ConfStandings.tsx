@@ -15,6 +15,7 @@ interface MyProps {
     loading: boolean;
 }
 
+// Rectangular standings of every team in conference
 const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
     const windowSize = useWindowSize();
     const [display, setDisplay] = useState(true);
@@ -27,6 +28,7 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
 
     return (
         <Grid container direction="column">
+            {/* Header w/conference name & drop down icon */}
             <Paper component={Stack} direction="row" justifyContent="center"  sx={{ cursor: 'pointer' }} onClick={() => setDisplay(!display)} alignItems="center" square elevation={0} style={{ fontSize: fontSize, height: divHeight, width: width, zIndex: 0 }}>
                 <Stack direction="row" alignItems="center" width="100%">
                     <Box width="15%"/>
@@ -37,6 +39,7 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
                     }
                 </Stack>
             </Paper>
+            {/* Every team w/logo & record */}
             {display && conference.divisions.map(div => 
                 <>
                     {div.name !== '' && 

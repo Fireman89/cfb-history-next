@@ -11,6 +11,7 @@ interface MyProps {
     year: number
 }
 
+// Contains all conference standings in grid
 const ConfGrid: React.FC<MyProps> = ({ year }) => {
     const [conferences, setConferences] = useState<Conference[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -29,6 +30,7 @@ const ConfGrid: React.FC<MyProps> = ({ year }) => {
 
     return (
         <div>
+            {/* Standings for every conference */}
             <Grid container direction="row" spacing={3} mb={5} justifyContent="center">
                 {conferences.map(conf => (
                     <Grid key={conf.name}>

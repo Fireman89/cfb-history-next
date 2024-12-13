@@ -20,6 +20,7 @@ interface MyProps {
 // Set this to true or false if we want to display copyrighted logos or not
 const FETCH_IMAGE = true;
 
+// Team logo image, adjusted by xy heights and current/past
 const TeamLogo: React.FC<MyProps> = ({ teamId, maxHeight, maxWidth, xy, isSchedule, fontSize }) => {
     const useCurrentLogo = useAppSelector(state => state.currentLogo.useCurrentLogo);
     const teams = useAppSelector(state => state.teamList.teamList);

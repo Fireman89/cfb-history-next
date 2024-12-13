@@ -9,19 +9,28 @@ import Footer from "@/component/Footer";
 
 import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from "react";
+import { FIRST_YEAR } from "@/const/const";
 
 // TODO resolve potential undefined URL or other screwery
 export default function Home() {
   const pathname = usePathname();
-  const [year, setYear] = useState('2022'); // Default to 2022
+  const [year, setYear] = useState<string | null>(null); // Initial state is null
 
   useEffect(() => {
     // Extract the year from the pathname (assuming the route is something like /year/2020)
     const segments = pathname.split('/');
     const yearFromPath = segments[2]; // Assuming /year/[year]
-    setYear(yearFromPath || '2022'); // Use the provided year or default to 2022
+       // Validate yearFromPath
+       const parsedYear = parseInt(yearFromPath, 10);
+       const isValidYear = !isNaN(parsedYear) && parsedYear >= FIRST_YEAR && parsedYear < 2023;
+       setYear(isValidYear ? yearFromPath : '2022'); // Use the provided year if valid, otherwise default to 2022
   }, [pathname]);
 
+  if (year === null) {
+    // Optionally render a loading state or nothing until year is determined
+    return <div>Loading...</div>;
+  }
+  
   return (
     <Provider store={store}>
       <div className="text-center">

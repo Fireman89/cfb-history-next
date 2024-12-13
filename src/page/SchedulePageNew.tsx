@@ -22,44 +22,41 @@ interface MyProps {
     year: string;
 }
 
+// Main page containing all elements
 const SchedulePageNew: React.FC<MyProps> = ({ year }) => {    
     const windowSize = useWindowSize();
     const isDesktopWidth = windowSize.width >= desktopWidth;
     const isDesktopHeight = windowSize.height >= desktopHeight;
 
     const teamId = useAppSelector(state => state.schedule.teamId);
-    // const { year } = useParams<MyParams>();
-    // const year = '2022';
-    // const navigate = useNavigate();
     const router = useRouter();
-    // TODO error check/exception redirect if it's not a parsable int
-    const currentYear: number = parseInt(year as string);
+ 
+    const currentYear: number = parseInt(year,10);
     const isValidYear = currentYear >= FIRST_YEAR && currentYear < 2023;
-    function setCurrentYear(year: number){
-        // navigate('../year/'+(year).toString());
-        router.push('../year/'+(year).toString());
+    function setCurrentYear(year: number) {
+        router.push(`/year/${year}`);
     }
     function incrementYear() {
-        // navigate('../year/'+(currentYear+1).toString());
-        router.push('../year/'+(currentYear+1).toString());
+        setCurrentYear(currentYear + 1);
     }
     function decrementYear() {
-        // navigate('../year/'+(currentYear-1).toString());
-        router.push('../year/'+(currentYear-1).toString());
+        setCurrentYear(currentYear - 1);
     }
     const isTeam: boolean = teamId !== NO_TEAM;
 
     const dispatch = useAppDispatch();
     // Call once when initialized
-    TeamService.getAllTeamsInYear(currentYear).then(response => {
-        dispatch(setTeamList(response as Team[]));
-    });
+    // TeamService.getAllTeamsInYear(currentYear).then(response => {
+    //     dispatch(setTeamList(response as Team[]));
+    // });
     useEffect(() => {
         // Update years once current year is changed
-        TeamService.getAllTeamsInYear(currentYear).then(response => {
-            dispatch(setTeamList(response as Team[]));
-        });
-    },[currentYear, dispatch]);
+        if (isValidYear) {
+            TeamService.getAllTeamsInYear(currentYear).then(response => {
+                dispatch(setTeamList(response as Team[]));
+            });
+        }
+    },[currentYear, dispatch, isValidYear]);
     return (
         isValidYear ?
             <Stack direction="column" alignItems="center" spacing={1} paddingTop={1}>

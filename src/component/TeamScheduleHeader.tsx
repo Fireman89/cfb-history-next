@@ -9,7 +9,8 @@ interface MyProps {
     year: number;
 }
 
-const ScheduleHeader: React.FC<MyProps> = ({ teamId, year }) => {
+// Appears above team's schedule on left of page
+const TeamScheduleHeader: React.FC<MyProps> = ({ teamId, year }) => {
     const [school, setSchool] = useState<string>('');
     const teams = useAppSelector(state => state.teamList.teamList);
 
@@ -26,4 +27,4 @@ const ScheduleHeader: React.FC<MyProps> = ({ teamId, year }) => {
     ) : <></>;
 };
 
-export default ScheduleHeader;
+export default TeamScheduleHeader;

@@ -20,6 +20,7 @@ interface MyProps {
     fontSize: number;
 }
 
+// Box in ConfStandings per team containing logo & record
 const TeamRecord: React.FC<MyProps> = ({ record, height, width, loading, fontSize }) => {   
     const [showModal, setShowModal] = useState(false);
     function closeModal() {
@@ -51,11 +52,11 @@ const TeamRecord: React.FC<MyProps> = ({ record, height, width, loading, fontSiz
         </Stack>
     ) : (
         <>
-            {/* <ScheduleModal teamId={team.id} year={record.year}/> */}
             {/* TODO - put this modal in another component to be reused in Rankings, 
             maybe use different formatting
             instead of reusing TeamSchedule component
         */}
+            {/* If on mobile, allow user to tap team to pull up their schedule */}
             {(!isDesktopWidth || !isDesktopHeight) &&
             <Modal open={showModal} onClose={() => closeModal()} sx={{overflowY: 'scroll'}}>
                 <Box alignItems="center" sx={{ top: 0, left: 0, width: '100%', background: 'white'}}>
@@ -70,6 +71,7 @@ const TeamRecord: React.FC<MyProps> = ({ record, height, width, loading, fontSiz
                 </Box>
             </Modal>
             }
+            {/* Entry */}
             <Stack
                 style={{ height: height, width: width, zIndex: 0, fontSize: fontSize, backgroundColor: 'white' }}
                 onMouseEnter={() => dispatch(setScheduleTeamId(team.id))}

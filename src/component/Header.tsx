@@ -4,6 +4,7 @@ import footballWhite from '../image/football-white.png';
 import useWindowSize from '../hook/useWindowSize';
 import Image from 'next/image';
 
+// Header containing site logo & motto
 const Header: React.FC = () => {
     const windowSize = useWindowSize();
     const width = windowSize.width;

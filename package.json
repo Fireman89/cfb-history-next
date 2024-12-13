@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.2.5",
     "@supabase/supabase-js": "^2.43.4",
     "axios": "^1.7.2",
+    "cfb-history-next": "file:",
     "mui": "^0.0.1",
     "next": "14.2.3",
     "react": "^18",

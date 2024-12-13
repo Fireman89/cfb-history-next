@@ -7,7 +7,7 @@ import GameService from '../api/gameService';
 import GameStatus from '../type/gameStatus';
 import TeamGame from '../type/teamGame';
 import TeamLogo from './TeamLogo';
-import ScheduleHeader from './ScheduleHeader';
+import TeamScheduleHeader from './TeamScheduleHeader';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setTeamSchedules } from '../store/scheduleListSlice';
 import Schedule from '../type/schedule';
@@ -74,7 +74,7 @@ const TeamSchedule: React.FC<MyProps> = ({ teamId, year }) => {
                     height={50}
                     width={width}
                 >
-                    <ScheduleHeader teamId={teamId} year={year}/>
+                    <TeamScheduleHeader teamId={teamId} year={year}/>
                 </Box>
                 {loading ?
                     <Stack style={{backgroundColor: 'white', height: logoHeight, width: width}}

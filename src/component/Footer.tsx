@@ -2,6 +2,7 @@
 import { AppBar, Toolbar } from '@mui/material';
 import Link from 'next/link';
 
+// Footer crediting sources
 const Footer: React.FC = () => {
     return (
         <div>

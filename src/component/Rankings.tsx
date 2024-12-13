@@ -16,6 +16,7 @@ interface MyProps {
   logoHeight: number;
 }
 
+// AP Rankings displayed right of ConfGrid
 const Rankings: React.FC<MyProps> = ({ year, height, width, logoHeight }) => {
     const [rankings, setRankings] = useState<Ranking[]>([]);
     const dispatch = useAppDispatch();

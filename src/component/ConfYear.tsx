@@ -19,6 +19,7 @@ interface MyProps {
 
 const arrowWidth = 40;
 
+// Bar atop ConfGrid allowing user to change year, either through arrows or drop down menu
 const ConfYear: React.FC<MyProps> = ({ defaultYear, onChange, incrementYear, decrementYear }) => {
     const useCurrentLogo = useAppSelector(state => state.currentLogo.useCurrentLogo);
     const windowSize = useWindowSize();
@@ -37,12 +38,14 @@ const ConfYear: React.FC<MyProps> = ({ defaultYear, onChange, incrementYear, dec
     }
     return (
         <Stack spacing={2} direction="row" alignItems="center" width="90vw">
+            {/* If on mobile site, option to pull up AP rankings menu */}
             <Box width="20%">
                 {!isDesktopWidth && 
                     <RankingsModal year={year}/>
                 }
             </Box>
             <Stack spacing={1} direction="row" justifyContent="center" width="60%">
+                {/* Move back a year (doesn't appear if it's the first year)*/}
                 <Box display="flex" width={arrowWidth}>
                     {!isFirstYear &&
                         <IconButton onClick={decrementYear}>
@@ -50,9 +53,11 @@ const ConfYear: React.FC<MyProps> = ({ defaultYear, onChange, incrementYear, dec
                         </IconButton>
                     }
                 </Box>
+                {/* Change year via drop-down menu */}
                 <Select value={year} onChange={handleChange} style={{ backgroundColor:'white'}}>
                     {years.map(y => <MenuItem key={y} value={y}>{y}</MenuItem>)}
                 </Select>            
+                {/* Move forward a year (doesn't appear if it's the current year) */}
                 <Box display="flex" width={arrowWidth}>
                     {!isCurrentYear &&
                         <IconButton onClick={incrementYear}>
@@ -61,6 +66,7 @@ const ConfYear: React.FC<MyProps> = ({ defaultYear, onChange, incrementYear, dec
                     }
                 </Box>
             </Stack>
+            {/* Trigger if current logos or year logos should be displayed */}
             <Stack direction="row" alignItems="center" justifyContent="center" width="20%">
                 <Typography>Current Logos</Typography>
                 <Switch checked={useCurrentLogo} onChange={() => dispatch(setUseCurrentLogo())}/>
