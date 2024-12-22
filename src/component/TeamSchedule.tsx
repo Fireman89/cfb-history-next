@@ -19,7 +19,7 @@ interface MyProps {
 }
 
 // const height = 65;
-const width = 200;
+const width = 180;
 
 const TeamSchedule: React.FC<MyProps> = ({ teamId, year }) => {    
     const windowSize = useWindowSize();
@@ -29,14 +29,16 @@ const TeamSchedule: React.FC<MyProps> = ({ teamId, year }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const dispatch = useAppDispatch();
     const schedules = useAppSelector(state => state.scheduleList.yearSchedules);
-    let logoHeight = 65;    // Default value
+    const DEFAULT = 50;
+    let logoHeight = DEFAULT;    // Default value
     if (games.length > 0)
-        logoHeight = (windowHeight - 48) / games.length;
-    if (logoHeight > 65)
-        logoHeight = 65;
-    let fontSize = logoHeight / 5 + 4;
-    if (fontSize > 16)
-        fontSize = 16;    
+        logoHeight = (windowHeight - 80) / games.length;
+    if (logoHeight > DEFAULT)
+        logoHeight = DEFAULT;
+    // // let fontSize = logoHeight / 5 + 4;
+    // if (fontSize > 16)
+    //     fontSize = 16;    
+    let fontSize = 17;
 
     // Update schedule list whenever year changes
     // TODO find way to have only one call on page load
@@ -85,15 +87,17 @@ const TeamSchedule: React.FC<MyProps> = ({ teamId, year }) => {
                     : games.map(game => (
                         <Stack
                             key={0}		
-                            style={{backgroundColor: 'white', height: logoHeight, width: width}}>
-                            <Grid container padding={2} alignItems="center" direction="row" alignContent="center" width="100%" height="100%">
-                                <Grid container xs={5} justifyContent="center">
-                                    <TeamLogo teamId={game.opponentTeamId} maxHeight={logoHeight-3} xy isSchedule fontSize={fontSize}/>
+                            style={{backgroundColor: 'white', height: logoHeight + 2, width: width}}>
+                            <Grid container padding={1} alignItems="center" direction="row" alignContent="center" width="100%" height="100%">
+                                <Grid container xs={6} justifyContent="center">
+                                    <TeamLogo teamId={game.opponentTeamId} maxHeight={logoHeight-3} xy isSchedule fontSize={fontSize - 3}/>
                                 </Grid>
-                                <Grid xs={7} fontSize="18px">
+                                <Grid xs={1} fontSize={{fontSize}} alignItems="center">
                                     <b style={{color: getGameStatusColor(game.gameStatus)}}>
                                         {game.gameStatus}
                                     </b>
+                                </Grid>
+                                <Grid xs={5} fontSize={{fontSize}}>
                                     {' ' + game.teamPoints + ' - ' + game.opponentTeamPoints}
                                 </Grid>
                             </Grid>

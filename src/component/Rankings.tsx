@@ -37,7 +37,7 @@ const Rankings: React.FC<MyProps> = ({ year, height, width, logoHeight }) => {
                         <Box
                             style={{ backgroundColor: 'white', height: '25px', width: width }}
                         >
-                            <Typography>Final AP Rankings</Typography>
+                            <Typography>AP Ranking</Typography>
                         </Box>
                     </Grid>
                     {rankings.map((r) => (
@@ -69,7 +69,7 @@ const Rankings: React.FC<MyProps> = ({ year, height, width, logoHeight }) => {
                                                 xy
                                                 maxHeight={logoHeight}
                                                 isSchedule
-                                                fontSize={18}
+                                                fontSize={14}
                                             />
                                         </Stack>
                                     </Grid>

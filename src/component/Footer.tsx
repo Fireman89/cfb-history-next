@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
                 <Toolbar>
                     <div>
                   All logos courtesy of <Link href="https://www.sportslogos.net" className='my-link'>SportsLogos.net</Link>.
-                  All logos belong to the NCAA® and their respective schools.
+                  All logos belong to the NCAA® and their respective schools. Images used through fair use.
                   Team and conference records sourced from publicly available records.
                   Records and games may not be fully accurate.
                   Logo sourced from Icons8.

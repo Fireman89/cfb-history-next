@@ -17,7 +17,9 @@ export default function Home() {
         <header className="text-2xl">
           <Header/>
         </header>
-        <main className="bg-gray-300 min-h-screen flex flex-col items-center justify-center text-black font-sans">
+        <main
+          className="bg-cover bg-center min-h-screen flex flex-col items-center justify-center text-black font-sans"
+        >
           <SchedulePageNew year={DEFAULT_YEAR}/>
         </main>
         <footer className="text-xl">

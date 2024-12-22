@@ -37,7 +37,7 @@ const ConfYear: React.FC<MyProps> = ({ defaultYear, onChange, incrementYear, dec
         onChange(event.target.value);
     }
     return (
-        <Stack spacing={2} direction="row" alignItems="center" width="90vw">
+        <Stack spacing={2} direction="row" alignItems="center" width="90vw" zIndex="0" position="sticky" top="0">
             {/* If on mobile site, option to pull up AP rankings menu */}
             <Box width="20%">
                 {!isDesktopWidth && 

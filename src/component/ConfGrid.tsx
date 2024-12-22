@@ -31,7 +31,7 @@ const ConfGrid: React.FC<MyProps> = ({ year }) => {
     return (
         <div>
             {/* Standings for every conference */}
-            <Grid container direction="row" spacing={3} mb={5} justifyContent="center">
+            <Grid container direction="column" spacing={3} mb={5} justifyContent="center">
                 {conferences.map(conf => (
                     <Grid key={conf.name}>
                         <ConfStandings conference={conf} loading={loading}/>

@@ -68,15 +68,15 @@ const TeamLogo: React.FC<MyProps> = ({ teamId, maxHeight, maxWidth, xy, isSchedu
         </div>    
     ) : (noImage === false ? (
         <div>
-            <img src={image} style={{ maxHeight: maxHeight, maxWidth: maxWidth, zIndex: -1, display: 'flex' }} alt="logo" height="auto" width="auto" title={school}/>
+            <img src={image} style={{ maxHeight: maxHeight, maxWidth: maxWidth, /*zIndex: -1,*/ display: 'flex' }} alt="logo" height="auto" width="auto" title={school}/>
         </div>
     ) : (
         <div>
-            {isSchedule ? (
+            {
                 fontSize? (
                     <b style={{ fontSize: fontSize, display: 'flex' }}>{school}</b>
                 ) : <b style={{ display: 'flex' }}>{school}</b>
-            ) : ''}
+            }
         </div>
     )
     );

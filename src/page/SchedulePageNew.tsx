@@ -59,7 +59,20 @@ const SchedulePageNew: React.FC<MyProps> = ({ year }) => {
     },[currentYear, dispatch, isValidYear]);
     return (
         isValidYear ?
-            <Stack direction="column" alignItems="center" spacing={1} paddingTop={1}>
+            <Stack direction="column" alignItems="center" spacing={1} paddingTop={1}
+                style={{
+                    backgroundImage: `
+                    linear-gradient(rgba(211, 211, 211, 0.5), rgba(211, 211, 211, 0.5)),
+                    url('https://cfbh-logos.s3.us-east-2.amazonaws.com/pennstate.jpg')
+                    `,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "repeat-y",
+                    backgroundAttachment: "fixed",
+                    width: "100%",
+                    minHeight: "100vh",
+                }}
+            >
                 {(!isDesktopWidth || !isDesktopHeight) && 
                     <Typography>Tap a team to view its schedule.</Typography>
                 }
@@ -69,7 +82,7 @@ const SchedulePageNew: React.FC<MyProps> = ({ year }) => {
                     incrementYear={incrementYear}
                     decrementYear={decrementYear}
                 />
-                <Stack direction="row" justifyContent="center" paddingLeft={5} paddingRight={5} spacing={2}>
+                <Stack direction="row" justifyContent="center" paddingLeft={8} paddingRight={8} spacing={8}>
                     {isDesktopWidth && isDesktopHeight &&
                     (isTeam ? 
                         <TeamSchedule 
@@ -94,9 +107,9 @@ const SchedulePageNew: React.FC<MyProps> = ({ year }) => {
                     {isDesktopWidth && 
                         <Rankings
                             year={currentYear}
-                            height={95}
-                            width={160}
-                            logoHeight={80}
+                            height={50}
+                            width={120}
+                            logoHeight={40}
                         />
                     }
                 </Stack>
