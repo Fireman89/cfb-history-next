@@ -1,6 +1,6 @@
 'use client'
 /* eslint-disable react/prop-types */
-import { Box, Paper, Stack } from '@mui/material';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Conference } from '../type/conference';
 import TeamRecord from './TeamRecord';
@@ -50,23 +50,46 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
 
       {/* Row/grid of TeamRecords */}
       {display && (
-        <Grid container spacing={1}>
-          {conference.divisions.flatMap((div) =>
-            div.teams.map((team) => (
-                <Grid key={1}>
-              <TeamRecord
-                key={team.id}
-                record={team}
-                loading={loading}
-                width={width}
-                height={height}
-                logoHeight={logoHeight}
-                fontSize={fontSize}
-              />
+        <Grid container spacing={3}>
+        {conference.divisions.map((div) => (
+          <Grid container spacing={1} key={div.id} alignItems="center">
+            {div.name && (
+              <Grid sx={{ width: "50px", height: "100%" }}>
+                <Typography
+                  variant="h6"
+                  align="left"
+                  sx={{
+                    transform: "rotate(-90deg)", // Rotate text 90 degrees to the left
+                    transformOrigin: "left bottom", // Adjust the origin of rotation
+                    whiteSpace: "nowrap", // Prevent wrapping
+                    marginTop: "16px", // Adjust for better positioning
+                  }}
+                >
+                  {div.name}
+                </Typography>
               </Grid>
-            ))
-          )}
-        </Grid>
+            )}
+      
+          <Grid container spacing={1} xs>
+            {/* Teams in the Division, sorted by name */}
+            {div.teams
+              .slice() // Copy the array to avoid mutation
+              .map((team) => (
+                <Grid key={team.id}>
+                  <TeamRecord
+                    record={team}
+                    loading={loading}
+                    width={width}
+                    height={height}
+                    logoHeight={logoHeight}
+                    fontSize={fontSize}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        ))}
+      </Grid>
       )}
     </Stack>
         // <Grid container direction="column">

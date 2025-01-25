@@ -57,50 +57,69 @@ const TeamRecord: React.FC<MyProps> = ({ record, height, width, loading, logoHei
             <CircularProgress />
         </Stack>
         ) : (
-        <Stack
-            direction="column"
-            alignItems="center"
-            alignContent="center"
-            justifyContent="center"
-            spacing={1}
-            width={width}
-            height={height}
-            // zIndex={0}
-            fontSize={fontSize}
-            style={{
-                // background: hover ? '#f0f0f0' : 'white',
-                background: 'white',
-                borderRadius: 4,
-            }}
-            onMouseEnter={() => {
-                setHover(true);
-                dispatch(setScheduleTeamId(record.team.id));
-            }}
-            onMouseLeave={() => setHover(false)}
-        >
-            <Grid container
+        <>
+            {/* If on mobile, allow user to tap team to pull up their schedule */}
+            {(!isDesktopWidth || !isDesktopHeight) &&
+                <Modal open={showModal} onClose={() => closeModal()} sx={{overflowY: 'scroll'}}>
+                    <Box alignItems="center" sx={{ top: 0, left: 0, width: '100%', background: 'white'}}>
+                        <CloseIcon
+                            fontSize="large"
+                            onClick={() => closeModal()}
+                            sx={{ position: 'sticky' }}
+                        />
+                        <Stack direction="row" justifyContent="center" paddingLeft={5} paddingRight={5} spacing={2}>
+                            <TeamSchedule teamId={team.id} year={record.year}/>
+                        </Stack>
+                    </Box>
+                </Modal>
+            }
+            {/* Entry */}
+            <Stack
                 direction="column"
                 alignItems="center"
                 alignContent="center"
+                justifyContent="center"
+                spacing={1}
+                width={width}
                 height={height}
                 // zIndex={0}
-                wrap='nowrap'
+                fontSize={fontSize}
+                style={{
+                    // background: hover ? '#f0f0f0' : 'white',
+                    background: 'white',
+                    borderRadius: 4,
+                }}
+                onMouseEnter={() => {
+                    setHover(true);
+                    dispatch(setScheduleTeamId(record.team.id));
+                }}
+                onMouseLeave={() => setHover(false)}
+                onClick={() => setShowModal(true)}
             >
-            <Grid item xs={8} alignContent="center">
-            {/* Team logo */}
-            <TeamLogo teamId={record.team.id} xy maxHeight={logoHeight} />
-            </Grid>
-            <Grid item xs={4} alignContent="center">
-            {/* Team record */}
-            <Box fontSize={fontSize}>
-                {record.totalWins + '-' + record.totalLosses}
-                {record.totalTies > 0 ? record.totalTies : ''}
-                {' (' + record.totalConfWins + '-' + record.totalConfLosses}
-                {record.totalConfTies > 0 ? record.totalConfTies + ')' : ')'}
-            </Box>
-            </Grid>
-            </Grid>
-        </Stack>
+                <Grid container
+                    direction="column"
+                    alignItems="center"
+                    alignContent="center"
+                    height={height}
+                    // zIndex={0}
+                    wrap='nowrap'
+                >
+                <Grid item xs={8} alignContent="center">
+                {/* Team logo */}
+                <TeamLogo teamId={record.team.id} xy maxHeight={logoHeight} />
+                </Grid>
+                <Grid item xs={4} alignContent="center">
+                {/* Team record */}
+                <Box fontSize={fontSize}>
+                    {record.totalWins + '-' + record.totalLosses}
+                    {record.totalTies > 0 ? record.totalTies : ''}
+                    {' (' + record.totalConfWins + '-' + record.totalConfLosses}
+                    {record.totalConfTies > 0 ? record.totalConfTies + ')' : ')'}
+                </Box>
+                </Grid>
+                </Grid>
+            </Stack>
+        </>
         );
     //     <Stack
     //         style={{ height: height, width: width, zIndex: 0, fontSize: fontSize, backgroundColor: 'white' }}

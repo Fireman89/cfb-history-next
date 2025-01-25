@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { store } from "@/store/store";
 import { Provider } from "react-redux";
-import SchedulePageNew from "@/page/SchedulePageNew";
+import SchedulePage from "@/page/SchedulePage";
 import Header from "@/component/Header";
 import Footer from "@/component/Footer";
 
@@ -20,7 +20,7 @@ export default function Home() {
         <main
           className="bg-cover bg-center min-h-screen flex flex-col items-center justify-center text-black font-sans"
         >
-          <SchedulePageNew year={DEFAULT_YEAR}/>
+          <SchedulePage year={DEFAULT_YEAR}/>
         </main>
         <footer className="text-xl">
           <Footer/>

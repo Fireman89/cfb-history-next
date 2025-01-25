@@ -23,7 +23,7 @@ interface MyProps {
 }
 
 // Main page containing all elements
-const SchedulePageNew: React.FC<MyProps> = ({ year }) => {    
+const SchedulePage: React.FC<MyProps> = ({ year }) => {    
     const windowSize = useWindowSize();
     const isDesktopWidth = windowSize.width >= desktopWidth;
     const isDesktopHeight = windowSize.height >= desktopHeight;
@@ -32,7 +32,7 @@ const SchedulePageNew: React.FC<MyProps> = ({ year }) => {
     const router = useRouter();
  
     const currentYear: number = parseInt(year,10);
-    const isValidYear = currentYear >= FIRST_YEAR && currentYear < 2023;
+    const isValidYear = currentYear >= FIRST_YEAR && currentYear < 2025;
     function setCurrentYear(year: number) {
         router.push(`/year/${year}`);
     }
@@ -121,4 +121,4 @@ const SchedulePageNew: React.FC<MyProps> = ({ year }) => {
     );
 };
 
-export default SchedulePageNew;
+export default SchedulePage;

@@ -32,7 +32,7 @@ const SchedulePage: React.FC = () => {
     const router = useRouter();
     // TODO error check/exception redirect if it's not a parsable int
     const currentYear: number = parseInt(year as string);
-    const isValidYear = currentYear >= FIRST_YEAR && currentYear < 2023;
+    const isValidYear = currentYear >= FIRST_YEAR && currentYear < 2025;
     function setCurrentYear(year: number){
         // navigate('../year/'+(year).toString());
         router.push('../year/'+(year).toString());

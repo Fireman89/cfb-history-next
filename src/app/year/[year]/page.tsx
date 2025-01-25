@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { store } from "@/store/store";
 import { Provider } from "react-redux";
-import SchedulePageNew from "@/page/SchedulePageNew";
+import SchedulePage from "@/page/SchedulePage";
 import Header from "@/component/Header";
 import Footer from "@/component/Footer";
 
@@ -22,7 +22,7 @@ export default function Home() {
     const yearFromPath = segments[2]; // Assuming /year/[year]
        // Validate yearFromPath
        const parsedYear = parseInt(yearFromPath, 10);
-       const isValidYear = !isNaN(parsedYear) && parsedYear >= FIRST_YEAR && parsedYear < 2023;
+       const isValidYear = !isNaN(parsedYear) && parsedYear >= FIRST_YEAR && parsedYear < 2025;
        setYear(isValidYear ? yearFromPath : '2022'); // Use the provided year if valid, otherwise default to 2022
   }, [pathname]);
 
@@ -39,7 +39,7 @@ export default function Home() {
           <Header/>
         </header>
         <main className="bg-gray-300 min-h-screen flex flex-col items-center justify-center text-black font-sans">
-          <SchedulePageNew year={year as string}/>
+          <SchedulePage year={year as string}/>
         </main>
         <footer className="text-xl">
           <Footer/>
