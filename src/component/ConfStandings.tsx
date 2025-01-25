@@ -52,7 +52,7 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
       {display && (
         <Grid container spacing={3}>
         {conference.divisions.map((div) => (
-          <Grid container spacing={1} key={div.id} alignItems="center">
+          <Grid container spacing={1} key={1} alignItems="center">
             {div.name && (
               <Grid sx={{ width: "50px", height: "100%" }}>
                 <Typography
