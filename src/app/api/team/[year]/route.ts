@@ -7,8 +7,7 @@ type Params = {
   year: number
 }
 
-export async function GET(request: NextRequest, context: { params: Params }) {
-  const params = await context?.params;
+export async function GET(request: NextRequest, { params }: { params: Params }) {
   const { year } = params;
   try {
         const teams: TeamResponse[] = await prisma.$queryRaw(Prisma.sql`
