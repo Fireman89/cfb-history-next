@@ -34,6 +34,7 @@ const GameService = {
             gameStatus = 'T';                        
         // null if points were not in response
         const game: TeamGame = {
+            id: r.id,
             year: r.year,
             week: r.week,
             isPostseasonGame: r.postseason == 1,

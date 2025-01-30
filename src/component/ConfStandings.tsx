@@ -1,13 +1,11 @@
 'use client'
 /* eslint-disable react/prop-types */
-import { Box, Paper, Stack, Typography } from '@mui/material';
+import { Paper, Stack, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Conference } from '../type/conference';
 import TeamRecord from './TeamRecord';
 import useWindowSize from '../hook/useWindowSize';
 import { useState } from 'react';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { zoomWidth } from '../const/const';
 
 interface MyProps {
@@ -21,11 +19,6 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
     const [display, setDisplay] = useState(true);
     const isZoomWidth = windowSize.width >= zoomWidth;
 
-    // const divHeight = isZoomWidth ? 50 : 30;
-    // const height = isZoomWidth ? 110 : 70;
-    // const width = isZoomWidth ? 260 : 220;
-    // const fontSize = isZoomWidth ? 21 : 18;  
-    const divHeight = 30;
     const height = isZoomWidth? 120 : 70;
     const width  = isZoomWidth? 120 : 70;
     const logoHeight = isZoomWidth? 70 : 40;
@@ -52,21 +45,38 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
       {display && (
         <Grid container spacing={3}>
         {conference.divisions.map((div) => (
-          <Grid container spacing={1} key={1} alignItems="center">
+          <Grid container spacing={2} key={div.name} alignItems="center">
             {div.name && (
-              <Grid sx={{ width: "50px", height: "100%" }}>
-                <Typography
-                  variant="h6"
-                  align="left"
+              <Grid 
+                sx={{
+                  width: "50px",
+                  height: "100%",
+                  padding: "4px",
+                }}
+              >
+                <Paper
+                  elevation={3}
                   sx={{
-                    transform: "rotate(-90deg)", // Rotate text 90 degrees to the left
-                    transformOrigin: "left bottom", // Adjust the origin of rotation
-                    whiteSpace: "nowrap", // Prevent wrapping
-                    marginTop: "16px", // Adjust for better positioning
+                    width: "80%",
+                    height: "100%", // Makes the Paper extend fully in the parent Grid
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#f5f5f5",
                   }}
                 >
-                  {div.name}
-                </Typography>
+                  <Typography
+                    sx={{                      
+                      transform: "rotate(-90deg)",
+                      transformOrigin: "center",
+                      whiteSpace: "nowrap",
+                      fontWeight: "bold",
+                      textAlign: "center",
+                    }}
+                  >
+                    {div.name}                    
+                  </Typography>
+                </Paper>
               </Grid>
             )}
       
@@ -74,6 +84,25 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
             {/* Teams in the Division, sorted by name */}
             {div.teams
               .slice() // Copy the array to avoid mutation
+              .sort((a, b) => {
+                // Calculate conference win percentage for both teams
+                const aConfWinPercentage =
+                  a.totalConfWins / (a.totalConfWins + a.totalConfLosses) || 0;
+                const bConfWinPercentage =
+                  b.totalConfWins / (b.totalConfWins + b.totalConfLosses) || 0;
+
+                // If conference win percentages are the same, compare total win percentages
+                if (aConfWinPercentage === bConfWinPercentage) {
+                  const aOverallWinPercentage =
+                    a.totalWins / (a.totalWins + a.totalLosses) || 0;
+                  const bOverallWinPercentage =
+                    b.totalWins / (b.totalWins + b.totalLosses) || 0;
+                  return bOverallWinPercentage - aOverallWinPercentage; // Sort by overall win percentage if needed
+                }
+
+                // Otherwise, sort by conference win percentage
+                return bConfWinPercentage - aConfWinPercentage; // Sort in descending order
+              })
               .map((team) => (
                 <Grid key={team.id}>
                   <TeamRecord
@@ -92,30 +121,6 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
       </Grid>
       )}
     </Stack>
-        // <Grid container direction="column">
-        //     {/* Header w/conference name & drop down icon */}
-        //     <Paper component={Stack} direction="row" justifyContent="center"  sx={{ cursor: 'pointer' }} onClick={() => setDisplay(!display)} alignItems="center" square elevation={0} style={{ fontSize: fontSize, height: divHeight, width: width, zIndex: 0 }}>
-        //         <Stack direction="row" alignItems="center" width="100%">
-        //             <Box width="15%"/>
-        //             <b style={{ width:'70%', textWrap: 'nowrap' }}>{conference.name}</b>
-        //             {display ?
-        //                 <ExpandMoreIcon width="15%"/>
-        //                 : <ExpandLessIcon width="15%"/>
-        //             }
-        //         </Stack>
-        //     </Paper>
-        //     {/* Every team w/logo & record */}
-        //     {display && conference.divisions.map(div => 
-        //         <>
-        //             {div.name !== '' && 
-        //                 <Paper component={Stack} justifyContent="center" square elevation={0} style={{ fontSize: fontSize, height: divHeight, width: width, background: 'lightgray', zIndex: 0 }}>
-        //                     <b>{div.name}</b>
-        //                 </Paper>
-        //             } 
-        //             {div.teams.map(team => <TeamRecord key={team.id} record={team} height={height} width={width} loading={loading} fontSize={fontSize}/>)}
-        //         </>
-        //     )}
-        // </Grid>
     );
 };
 

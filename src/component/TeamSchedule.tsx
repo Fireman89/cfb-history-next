@@ -86,7 +86,7 @@ const TeamSchedule: React.FC<MyProps> = ({ teamId, year }) => {
                     </Stack>            
                     : games.map(game => (
                         <Stack
-                            key={0}		
+                            key={game.id}		
                             style={{backgroundColor: 'white', height: logoHeight + 2, width: width}}>
                             <Grid container padding={1} alignItems="center" direction="row" alignContent="center" width="100%" height="100%">
                                 <Grid container xs={6} justifyContent="center">

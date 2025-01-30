@@ -8,7 +8,8 @@ type Params = {
   year: string
 }
 
-export async function GET(request: NextRequest, { params }: { params: Params }) {
+export async function GET(request: NextRequest, context: { params: Params }) {
+  const params = await context?.params;
   const { year } = params;
   try {
         // TODO fix this error

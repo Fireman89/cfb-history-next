@@ -1,5 +1,6 @@
 // Can serve as direct response from backend
 type TeamGame = {
+    id: number,
     year: number,
     week: number,
     isPostseasonGame: boolean,
