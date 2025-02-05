@@ -3,12 +3,8 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
-type Params = {
-  year: number
-}
-
-export async function GET(request: NextRequest, { params }: { params: Params }) {
-  const { year } = params;
+export async function GET(request: NextRequest, { params }: { params: Promise<{ year: string }> }) {
+  const { year } = await params;
   try {
         const teams: TeamResponse[] = await prisma.$queryRaw(Prisma.sql`
         select id, name_full as full_name, name_school as school, mascot, logo, current_logo from teams t left join (

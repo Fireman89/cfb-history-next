@@ -4,12 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { RankingResponse } from '@/type/ranking';
 
-type Params = {
-  year: string
-}
-
-export async function GET(request: NextRequest, { params }: { params: Params }) {
-  const { year } = params;
+export async function GET(request: NextRequest, { params }: { params: Promise<{ year: string }> }) {
+  const { year } = await params;
   try {
         // TODO fix this error
         const records: any = await prisma.rankings.findMany({
