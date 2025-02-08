@@ -1,6 +1,6 @@
 'use client'
 /* eslint-disable react/prop-types */
-import { Box, IconButton, MenuItem, Select, Stack, Switch, Typography } from '@mui/material';
+import { Box, IconButton, MenuItem, Paper, Select, Stack, Switch, Typography } from '@mui/material';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useEffect, useState } from 'react';
@@ -37,7 +37,7 @@ const ConfYear: React.FC<MyProps> = ({ defaultYear, onChange, incrementYear, dec
         onChange(event.target.value);
     }
     return (
-        <Stack spacing={2} direction="row" alignItems="center" width="90vw" zIndex="0" position="sticky" top="0">
+        <Stack spacing={2} direction="row" alignItems="center" width="90vw" zIndex="1" position="sticky" top="0">
             {/* If on mobile site, option to pull up AP rankings menu */}
             <Box width="20%">
                 {!isDesktopWidth && 
@@ -54,9 +54,11 @@ const ConfYear: React.FC<MyProps> = ({ defaultYear, onChange, incrementYear, dec
                     }
                 </Box>
                 {/* Change year via drop-down menu */}
-                <Select value={year} onChange={handleChange} style={{ backgroundColor:'white'}}>
-                    {years.map(y => <MenuItem key={y} value={y}>{y}</MenuItem>)}
-                </Select>            
+                <Paper elevation={5}>
+                    <Select value={year} onChange={handleChange} sx={{ border: "none"}}>
+                        {years.map(y => <MenuItem key={y} value={y} >{y}</MenuItem>)}
+                    </Select>
+                </Paper>
                 {/* Move forward a year (doesn't appear if it's the current year) */}
                 <Box display="flex" width={arrowWidth}>
                     {!isCurrentYear &&
@@ -68,8 +70,12 @@ const ConfYear: React.FC<MyProps> = ({ defaultYear, onChange, incrementYear, dec
             </Stack>
             {/* Trigger if current logos or year logos should be displayed */}
             <Stack direction="row" alignItems="center" justifyContent="center" width="20%">
-                <Typography>Current Logos</Typography>
-                <Switch checked={useCurrentLogo} onChange={() => dispatch(setUseCurrentLogo())}/>
+                <Paper elevation={3}>
+                <Stack direction="row" alignItems="center" justifyContent="center">
+                    <Typography>Current Logos</Typography>
+                    <Switch checked={useCurrentLogo} onChange={() => dispatch(setUseCurrentLogo())}/>
+                </Stack>
+                </Paper>
             </Stack>
         </Stack>
     );

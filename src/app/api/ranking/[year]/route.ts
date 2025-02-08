@@ -21,7 +21,6 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     }
   } catch (error) {
     console.error('Error fetching rankings for year:', year);
-    console.error(error);
 
     return NextResponse.json(
       { error: `Failed to fetch rankings for year ${year}. ${error instanceof Error ? error.message : 'Unknown error'}` },

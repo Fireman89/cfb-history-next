@@ -1,6 +1,6 @@
 'use client'
 /* eslint-disable react/prop-types */
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 import TeamLogo from './TeamLogo';
 import RankingService from '../api/rankingService';
 import Ranking from '../type/ranking';
@@ -31,11 +31,12 @@ const Rankings: React.FC<MyProps> = ({ year, height, width, logoHeight }) => {
     // Assumes rankings are already sorted from 1-25 on backend call
     return (
         <Stack justifyContent="space-between">
+        <Paper elevation={5}>
             {rankings.length > 0 ? (
                 <Grid container justifyContent="center" direction="column">
                     <Grid style={{ width: width }}>
                         <Box
-                            style={{ backgroundColor: 'white', height: '25px', width: width }}
+                            style={{ height: '25px', width: width }}
                         >
                             <Typography>AP Ranking</Typography>
                         </Box>
@@ -45,7 +46,7 @@ const Rankings: React.FC<MyProps> = ({ year, height, width, logoHeight }) => {
                             <Stack
                                 justifyContent="center"
                                 direction="row"
-                                sx={{ backgroundColor: 'white', height: height, width: width }}
+                                sx={{ height: height, width: width }}
                             >
                                 <Grid
                                     container
@@ -81,6 +82,7 @@ const Rankings: React.FC<MyProps> = ({ year, height, width, logoHeight }) => {
             ) : (
                 ''
             )}
+        </Paper>
         </Stack>
     );
 };

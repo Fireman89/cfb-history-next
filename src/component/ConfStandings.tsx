@@ -32,6 +32,7 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
         direction="row"
         justifyContent="space-between"
         alignItems="center"
+        elevation={5}
         sx={{
           cursor: 'pointer',
           padding: '5px 15px',
@@ -45,17 +46,18 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
       {display && (
         <Grid container spacing={3}>
         {conference.divisions.map((div) => (
-          <Grid container spacing={2} key={div.name} alignItems="center">
+          <Grid container spacing={2} key={div.name} alignItems="center"
+            direction={isZoomWidth? "column" : "row"}>
             {div.name && (
               <Grid 
                 sx={{
-                  width: "50px",
-                  height: "100%",
+                  width: isZoomWidth? "50px" : "100%",
+                  height: isZoomWidth? "100%": "30px",
                   padding: "4px",
                 }}
               >
                 <Paper
-                  elevation={3}
+                  elevation={5}
                   sx={{
                     width: "80%",
                     height: "100%", // Makes the Paper extend fully in the parent Grid
@@ -67,7 +69,7 @@ const ConfStandings: React.FC<MyProps> = ({ conference, loading }) => {
                 >
                   <Typography
                     sx={{                      
-                      transform: "rotate(-90deg)",
+                      ...(isZoomWidth ? {transform: "rotate(-90deg)"} : { }),
                       transformOrigin: "center",
                       whiteSpace: "nowrap",
                       fontWeight: "bold",

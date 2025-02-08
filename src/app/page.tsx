@@ -7,7 +7,7 @@ import SchedulePage from "@/page/SchedulePage";
 import Header from "@/component/Header";
 import Footer from "@/component/Footer";
 
-const DEFAULT_YEAR = '2022';
+export const DEFAULT_YEAR = '2024';
 
 export default function Home() {
   return (

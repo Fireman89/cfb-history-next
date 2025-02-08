@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 // import { useNavigate, useParams } from 'react-router-dom';
 import ConfGrid from '../component/ConfGrid';
 import ConfYear from '../component/ConfYear';
@@ -45,10 +45,6 @@ const SchedulePage: React.FC<MyProps> = ({ year }) => {
     const isTeam: boolean = teamId !== NO_TEAM;
 
     const dispatch = useAppDispatch();
-    // Call once when initialized
-    // TeamService.getAllTeamsInYear(currentYear).then(response => {
-    //     dispatch(setTeamList(response as Team[]));
-    // });
     useEffect(() => {
         // Update years once current year is changed
         if (isValidYear) {
@@ -91,14 +87,13 @@ const SchedulePage: React.FC<MyProps> = ({ year }) => {
                         />
                         :                        
                         <Stack justifyContent="space-between">
-                            <Stack justifyContent="center" position="sticky" top="0">  
-                                <Box
-                                    style={{ height: '55px', width: '200px', backgroundColor: 'white' }}
+                            <Stack  position="sticky" height='105px' width='180px' top="0">  
+                                <Paper elevation={5}
                                 >
                                     <Typography style={{ margin: 2, fontSize: 16 }}>
                                         Hover over or tap a team to see their schedule.
                                     </Typography>
-                                </Box>
+                                </Paper>
                             </Stack>
                         </Stack>
                     )

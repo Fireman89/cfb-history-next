@@ -1,6 +1,6 @@
 'use client'
 /* eslint-disable react/prop-types */
-import { Box, Button, Modal, Stack, Typography } from '@mui/material';
+import { Box, Button, Modal, Paper, Stack, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from 'react';
@@ -37,7 +37,9 @@ const RankingsModal: React.FC<MyProps> = ({ year }) => {
     return(
         <div>
             {rankings.length > 0 && 
+            <Paper elevation={5}>
                 <Button onClick={openModal} sx={{color: 'black', textTransform: 'none', fontSize: 16}}>View AP Rankings</Button>
+            </Paper>
             }
             <Modal
                 open={open}

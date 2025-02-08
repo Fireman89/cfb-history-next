@@ -23,7 +23,7 @@ export default function Home() {
        // Validate yearFromPath
        const parsedYear = parseInt(yearFromPath, 10);
        const isValidYear = !isNaN(parsedYear) && parsedYear >= FIRST_YEAR && parsedYear < 2025;
-       setYear(isValidYear ? yearFromPath : '2022'); // Use the provided year if valid, otherwise default to 2022
+       setYear(isValidYear ? yearFromPath : '2024'); // Use the provided year if valid, otherwise default to 2022
   }, [pathname]);
 
   if (year === null) {
