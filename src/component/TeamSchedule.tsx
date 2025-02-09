@@ -79,8 +79,8 @@ const TeamSchedule: React.FC<MyProps> = ({ teamId, year }) => {
                     <TeamScheduleHeader teamId={teamId} year={year}/>
                 </Box>
                 {loading ?
-                    <Paper style={{backgroundColor: 'white', height: logoHeight, width: width}}
-                        alignContent="center" alignItems="center" justifyContent="center"
+                    <Paper
+                        style={{backgroundColor: 'white', height: logoHeight, width: width}}                        
                     >
                         <CircularProgress/>
                     </Paper>            
