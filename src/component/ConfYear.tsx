@@ -25,14 +25,14 @@ const ConfYear: React.FC<MyProps> = ({ defaultYear, onChange, incrementYear, dec
     const windowSize = useWindowSize();
     const isDesktopWidth = windowSize.width >= desktopWidth;
     const isFirstYear = defaultYear === FIRST_YEAR;
-    const isCurrentYear = defaultYear === CURRENT_YEAR - 1;
+    const isCurrentYear = defaultYear === CURRENT_YEAR;
 
     const dispatch = useAppDispatch();
     const [year, setYear] = useState(defaultYear);
     useEffect(() => {
         setYear(defaultYear);
     },[defaultYear]);
-    const years = Array.from({ length: CURRENT_YEAR - FIRST_YEAR}, (value, index) => index + FIRST_YEAR);
+    const years = Array.from({ length: CURRENT_YEAR - FIRST_YEAR + 1}, (value, index) => index + FIRST_YEAR);
     function handleChange(event: any) {
         onChange(event.target.value);
     }
