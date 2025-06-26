@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   title: "CFBHistory - Interactive Archive",
   description: "Discover records, logos, and more!",
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico'
-  }
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

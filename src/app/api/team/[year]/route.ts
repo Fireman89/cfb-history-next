@@ -1,9 +1,12 @@
-import { TeamResponse } from '@/type/team';
-import { Prisma, PrismaClient } from '@prisma/client';
-import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { TeamResponse } from "@/type/team";
+import { Prisma, PrismaClient } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ year: string }> }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ year: string }> }
+) {
   const { year } = await params;
   try {
     const teams: TeamResponse[] = await prisma.$queryRaw(Prisma.sql`
@@ -23,14 +26,16 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     `);
     if (teams) {
       return NextResponse.json(teams, { status: 200 });
-    } else {          
-      return NextResponse.json({ error: 'Teams not found' }, { status: 404 });
+    } else {
+      return NextResponse.json({ error: "Teams not found" }, { status: 404 });
     }
   } catch (error) {
-    console.error('Error fetching teams for year:', year);
+    console.error("Error fetching teams for year:", year);
 
     return NextResponse.json(
-      { error: `Failed to fetch teams for year ${year}. ${error instanceof Error ? error.message : 'Unknown error'}` },
+      {
+        error: `Failed to fetch teams for year ${year}. ${error instanceof Error ? error.message : "Unknown error"}`,
+      },
       { status: 500 }
     );
   }

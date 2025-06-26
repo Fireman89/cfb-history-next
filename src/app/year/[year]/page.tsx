@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import { store } from "@/store/store";
@@ -7,7 +7,12 @@ import SchedulePage from "@/page/SchedulePage";
 import Header from "@/component/Header";
 import Footer from "@/component/Footer";
 
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { useState, useEffect } from "react";
 import { FIRST_YEAR } from "@/const/const";
 
@@ -18,31 +23,32 @@ export default function Home() {
 
   useEffect(() => {
     // Extract the year from the pathname (assuming the route is something like /year/2020)
-    const segments = pathname.split('/');
+    const segments = pathname.split("/");
     const yearFromPath = segments[2]; // Assuming /year/[year]
-       // Validate yearFromPath
-       const parsedYear = parseInt(yearFromPath, 10);
-       const isValidYear = !isNaN(parsedYear) && parsedYear >= FIRST_YEAR && parsedYear < 2025;
-       setYear(isValidYear ? yearFromPath : '2024'); // Use the provided year if valid, otherwise default to 2022
+    // Validate yearFromPath
+    const parsedYear = parseInt(yearFromPath, 10);
+    const isValidYear =
+      !isNaN(parsedYear) && parsedYear >= FIRST_YEAR && parsedYear < 2025;
+    setYear(isValidYear ? yearFromPath : "2024"); // Use the provided year if valid, otherwise default to 2022
   }, [pathname]);
 
   if (year === null) {
     // Optionally render a loading state or nothing until year is determined
     return <div>Loading...</div>;
   }
-  
+
   return (
     <Provider store={store}>
       <div className="text-center">
         {/* <main className="flex min-h-screen flex-col items-center justify-between p-24"> */}
         <header className="text-2xl">
-          <Header/>
+          <Header />
         </header>
         <main className="bg-gray-300 min-h-screen flex flex-col items-center justify-center text-black font-sans">
-          <SchedulePage year={year as string}/>
+          <SchedulePage year={year as string} />
         </main>
         <footer className="text-xl">
-          <Footer/>
+          <Footer />
         </footer>
       </div>
     </Provider>

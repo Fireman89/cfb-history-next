@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Team } from '../type/team';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { Team } from "../type/team";
 
 export interface TeamListState {
-    teamList: Team[]
+  teamList: Team[];
 }
 
 const initialState: TeamListState = {
-    teamList: []
+  teamList: [],
 };
 
 const teamListSlice = createSlice({
-    name: 'teamList',
-    initialState,
-    reducers: {
-        setTeamList: (state, action: PayloadAction<Team[]>) => {
-            state.teamList = action.payload;
-        }
-    }
+  name: "teamList",
+  initialState,
+  reducers: {
+    setTeamList: (state, action: PayloadAction<Team[]>) => {
+      state.teamList = action.payload;
+    },
+  },
 });
 
 export const { setTeamList } = teamListSlice.actions;
